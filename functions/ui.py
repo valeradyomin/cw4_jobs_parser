@@ -10,15 +10,16 @@ def user_interaction():
         Vacancy.get_empty_list()
         interaction_count += 1
         print("\nНачальное меню:")
-        interaction = input("укажите действие:\n1 - HH\n2 - SJ\n3 - Выход\n")
+        interaction = input("Укажите действие:"
+                            "\n1 - использовать HeadHunter\n2 - использовать SuperJob\n3 - Выход\n")
         if interaction == "1":
             while True:
-                keyword = input("укажите ключевое слово вакансии:\n").strip()
+                keyword = input("Укажите ключевое слово вакансии:\n").strip()
                 if keyword == "3":
                     break
                 while True:
                     try:
-                        num_vacancies = int(input("укажите количество вакансий:\n"))
+                        num_vacancies = int(input("Укажите количество вакансий:\n"))
                         break
                     except ValueError:
                         print("Введено некорректное значение. Пожалуйста, введите число.")
@@ -34,9 +35,10 @@ def user_interaction():
                     json_saver = JsonOut(vacancies)
 
                     print("\nМеню отображения результатов:")
-                    sub_interaction = input("отобразить результат:\n1 - полный"
-                                            "\n2 - отсортированный\n3 - средняя зарплата от"
-                                            "\n4 - ТОП-№ вакансий\n")
+                    sub_interaction = input("Отобразить и сохранить в файл результат:\n1 - полная выборка"
+                                            "\n2 - отсортированный по убыванию зарплаты (сначала большая зарплата"
+                                            "\n3 - с зарплатой больше указанного значения (указать минимальную)"
+                                            "\n4 - ТОП-№ вакансий по зарплате (указать количество выборки)\n")
 
                     if sub_interaction == "1" and sub_interaction in ("1", "2", "3", "4"):
                         json_saver.save_to_file(
@@ -99,17 +101,16 @@ def user_interaction():
                         break
                     else:
                         Vacancy.get_empty_list()
-                        print("Некорректный ввод. Повторите.")
+                        print("Некорректный ввод. Повторите действие.")
 
         elif interaction == "2":
-            # аналогичный код для SuperJob
             while True:
-                keyword = input("укажите ключевое слово вакансии:\n").strip()
+                keyword = input("Укажите ключевое слово вакансии:\n").strip()
                 if keyword == "3":
                     break
                 while True:
                     try:
-                        num_vacancies = int(input("укажите количество вакансий:\n"))
+                        num_vacancies = int(input("Укажите количество вакансий:\n"))
                         break
                     except ValueError:
                         print("Введено некорректное значение. Пожалуйста, введите число.")
@@ -125,9 +126,10 @@ def user_interaction():
                     json_saver = JsonOut(vacancies)
 
                     print("\nМеню отображения результатов:")
-                    sub_interaction = input("отобразить результат:\n1 - полный"
-                                            "\n2 - отсортированный\n3 - средняя зарплата от"
-                                            "\n4 - ТОП-№ вакансий\n")
+                    sub_interaction = input("Отобразить и сохранить в файл результат:\n1 - полная выборка"
+                                            "\n2 - отсортированный по убыванию зарплаты (сначала большая зарплата"
+                                            "\n3 - с зарплатой больше указанного значения (указать минимальную)"
+                                            "\n4 - ТОП-№ вакансий по зарплате (указать количество выборки)\n")
 
                     if sub_interaction == "1" and sub_interaction in ("1", "2", "3", "4"):
                         json_saver.save_to_file(
@@ -190,6 +192,6 @@ def user_interaction():
                         break
                     else:
                         Vacancy.get_empty_list()
-                        print("Некорректный ввод. Повторите.")
+                        print("Некорректный ввод. Повторите действие.")
         elif interaction == "3":
             exit()

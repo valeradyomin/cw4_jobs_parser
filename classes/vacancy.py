@@ -25,7 +25,7 @@ class Vacancy:
         print(f"Ссылка - {self.url}")
         print(f"Средняя зарплата - {self.average_salary} {self.currency}")
         print(f"Краткая аннотация - '{self.slice_string(self.requirement, 11)} ...'")
-        print()
+
 
     def get_average_salary(self):
         if self.salary_from is not None and self.salary_to is not None:
