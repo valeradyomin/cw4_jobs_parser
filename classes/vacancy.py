@@ -19,10 +19,6 @@ class Vacancy:
                 f"salary_from={self.salary_from}, salary_to={self.salary_to}, average_salary={self.average_salary},"
                 f"currency={self.currency}, requirement={self.requirement})")
 
-    # def __str__(self):
-    #     return (f"Название: {self.title},\nСсылка: {self.url},\nЗарплата: от {self.salary_from} до {self.salary_to}, "
-    #             f"\nОписание: {self.requirement}")
-
     def get_overview(self):
         print()
         print(f"Название - {self.title}")
@@ -65,3 +61,15 @@ class Vacancy:
                 break
         return result
 
+    @classmethod
+    def get_empty_list(cls):
+        cls.vacancies_objs_lst.clear()
+
+    def __eq__(self, other):
+        return self.get_average_salary() == other.get_average_salary()
+
+    def __lt__(self, other):
+        return self.get_average_salary() < other.get_average_salary()
+
+    def __gt__(self, other):
+        return self.get_average_salary() > other.get_average_salary()
