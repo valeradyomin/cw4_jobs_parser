@@ -1,12 +1,14 @@
 from classes.hh import HeadHunter
-from classes.saver import JsonOut
 from classes.sj import SuperJob
+from classes.saver import JsonOut
 from classes.vacancy import Vacancy
 
 
 def user_interaction():
+    interaction_count = 0
     while True:
         Vacancy.get_empty_list()
+        interaction_count += 1
         print("\nНачальное меню:")
         interaction = input("укажите действие:\n1 - HH\n2 - SJ\n3 - Выход\n")
         if interaction == "1":
@@ -36,21 +38,25 @@ def user_interaction():
                                             "\n2 - отсортированный\n3 - средняя зарплата от"
                                             "\n4 - ТОП-№ вакансий\n")
 
-                    if sub_interaction == "1":
-                        json_saver.save_to_file(vacancies, filename="01.json")
+                    if sub_interaction == "1" and sub_interaction in ("1", "2", "3", "4"):
+                        json_saver.save_to_file(
+                            vacancies, filename=f"{interaction_count}_{HeadHunter.__name__}_{keyword}_full.json"
+                        )
                         for vacancy in vacancies:
                             vacancy.get_overview()
                         print(f"Сохранено в файл {len(vacancies)} вакансий")
                         break
 
-                    elif sub_interaction == "2":
-                        sorted_vacancies = json_saver.get_sort_by_average_salary(filename="02.json")
+                    elif sub_interaction == "2" and sub_interaction in ("1", "2", "3", "4"):
+                        sorted_vacancies = json_saver.get_sort_by_average_salary(
+                            filename=f"{interaction_count}_{HeadHunter.__name__}_{keyword}_sorted.json"
+                        )
                         for vacancy in sorted_vacancies:
                             vacancy.get_overview()
                         print(f"Сохранено в файл {len(sorted_vacancies)} вакансий")
                         break
 
-                    elif sub_interaction == "3":
+                    elif sub_interaction == "3" and sub_interaction in ("1", "2", "3", "4"):
                         while True:
                             while True:
                                 try:
@@ -61,23 +67,27 @@ def user_interaction():
                             filtered_vacancies = [vacancy for vacancy in vacancies if
                                                   vacancy.average_salary >= min_salary]
                             if len(filtered_vacancies) > 0:
-                                vacancies_by_average_salary = json_saver.get_vacancies_by_average_salary(min_salary,
-                                                                                                         filename="03.json")
+                                vacancies_by_average_salary = json_saver.get_vacancies_by_average_salary(
+                                    min_salary,
+                                    filename=f"{interaction_count}_{HeadHunter.__name__}_{keyword}_average.json"
+                                )
                                 for vacancy in vacancies_by_average_salary:
                                     vacancy.get_overview()
                                 print(f"Сохранено в файл {len(vacancies_by_average_salary)} вакансий")
                                 break
                             else:
                                 print(
-                                    "Нет вакансий с указанной минимальной зарплатой.")
+                                    "Нет вакансий с указанной минимальной зарплатой. Введите другое значение.")
                         break
 
-                    elif sub_interaction == "4":
+                    elif sub_interaction == "4" and sub_interaction in ("1", "2", "3", "4"):
                         while True:
                             try:
                                 top_n = int(input("Укажите количество топ-вакансий по зарплате\n"))
                                 if top_n <= num_vacancies:
-                                    top_n_vacancies = json_saver.get_top_n_vacancies(top_n, filename="04.json")
+                                    top_n_vacancies = json_saver.get_top_n_vacancies(
+                                        top_n, filename=f"{interaction_count}_{HeadHunter.__name__}_{keyword}_top.json"
+                                    )
                                     for vacancy in top_n_vacancies:
                                         vacancy.get_overview()
                                     print(f"Сохранено в файл {len(top_n_vacancies)} вакансий")
@@ -85,10 +95,14 @@ def user_interaction():
                                 else:
                                     print(f"Укажите значение меньше {num_vacancies} либо равно")
                             except ValueError:
-                                print("Введено некорректное значение.")
+                                print("Введено некорректное значение. Пожалуйста, введите число.")
                         break
+                    else:
+                        Vacancy.get_empty_list()
+                        print("Некорректный ввод. Повторите.")
 
         elif interaction == "2":
+            # аналогичный код для SuperJob
             while True:
                 keyword = input("укажите ключевое слово вакансии:\n").strip()
                 if keyword == "3":
@@ -117,7 +131,7 @@ def user_interaction():
 
                     if sub_interaction == "1" and sub_interaction in ("1", "2", "3", "4"):
                         json_saver.save_to_file(
-                            vacancies, filename=f"{keyword}_full.json"
+                            vacancies, filename=f"{interaction_count}_{SuperJob.__name__}_{keyword}_full.json"
                         )
                         for vacancy in vacancies:
                             vacancy.get_overview()
@@ -126,7 +140,7 @@ def user_interaction():
 
                     elif sub_interaction == "2" and sub_interaction in ("1", "2", "3", "4"):
                         sorted_vacancies = json_saver.get_sort_by_average_salary(
-                            filename=f"{keyword}_sorted.json"
+                            filename=f"{interaction_count}_{SuperJob.__name__}_{keyword}_sorted.json"
                         )
                         for vacancy in sorted_vacancies:
                             vacancy.get_overview()
@@ -146,7 +160,7 @@ def user_interaction():
                             if len(filtered_vacancies) > 0:
                                 vacancies_by_average_salary = json_saver.get_vacancies_by_average_salary(
                                     min_salary,
-                                    filename=f"{keyword}_average.json"
+                                    filename=f"{interaction_count}_{SuperJob.__name__}_{keyword}_average.json"
                                 )
                                 for vacancy in vacancies_by_average_salary:
                                     vacancy.get_overview()
@@ -154,7 +168,7 @@ def user_interaction():
                                 break
                             else:
                                 print(
-                                    "Нет вакансий с указанной минимальной зарплатой.")
+                                    "Нет вакансий с указанной минимальной зарплатой. Введите другое значение.")
                         break
 
                     elif sub_interaction == "4" and sub_interaction in ("1", "2", "3", "4"):
@@ -163,7 +177,7 @@ def user_interaction():
                                 top_n = int(input("Укажите количество топ-вакансий по зарплате\n"))
                                 if top_n <= num_vacancies:
                                     top_n_vacancies = json_saver.get_top_n_vacancies(
-                                        top_n, filename=f"{keyword}_top.json"
+                                        top_n, filename=f"{interaction_count}_{SuperJob.__name__}_{keyword}_top.json"
                                     )
                                     for vacancy in top_n_vacancies:
                                         vacancy.get_overview()
