@@ -15,6 +15,11 @@ class HeadHunter(GetByApi):
                   }
         response = requests.get(url=__URL, headers=headers, params=params).json()
 
+        check = requests.get("https://api.hh.ru/vacancies")
+        if check.status_code != requests.codes.ok:
+            print(f"{check.status_code} - ошибка соединения. Программа завершается.")
+            exit()
+
         if "items" not in response or not response["items"]:
             # print(f"К сожалению нет вакансий по запросу: {keyword}")
             return []
