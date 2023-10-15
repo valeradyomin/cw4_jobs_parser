@@ -27,6 +27,12 @@ class SuperJob(GetByApi):
                 "currency": "rub",
                 "date_published_from": unix_time,
             }
+
+            check = requests.get("https://api.superjob.ru/2.0/vacancies/")
+            if check.status_code != requests.codes.ok:
+                print(f"{check.status_code} - ошибка соединения. Программа завершается.")
+                exit()
+
             response = requests.get(url=__URL, headers=headers, params=params).json()
 
             if "objects" not in response or not response["objects"]:
