@@ -28,7 +28,7 @@ class SuperJob(GetByApi):
                 "date_published_from": unix_time,
             }
 
-            check = requests.get("https://api.superjob.ru/2.0/vacancies/")
+            check = requests.get(url=__URL, headers=headers)
             if check.status_code != requests.codes.ok:
                 print(f"{check.status_code} - ошибка соединения. Программа завершается.")
                 exit()
