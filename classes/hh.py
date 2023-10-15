@@ -5,6 +5,16 @@ from classes.abstract import GetByApi
 
 class HeadHunter(GetByApi):
     def get_vacancies(self, keyword, num_vacancies=25):
+        """
+        Получить список вакансий из API HeadHunter на основе указанного ключевого слова.
+
+        Аргументы:
+            keyword (str): Ключевое слово для поиска вакансий.
+            num_vacancies (int, optional): Количество вакансий для получения.
+
+        Возвращает:
+            list: Список словарей, представляющих полученные вакансии.
+        """
         __URL = "https://api.hh.ru/vacancies"
         headers = {'User-Agent': 'api-test-agent'}
         params = {"text": keyword,
@@ -15,13 +25,14 @@ class HeadHunter(GetByApi):
                   }
         response = requests.get(url=__URL, headers=headers, params=params).json()
 
+        # Проверка соединения с API
         check = requests.get("https://api.hh.ru/vacancies")
         if check.status_code != requests.codes.ok:
             print(f"{check.status_code} - ошибка соединения. Программа завершается.")
             exit()
 
         if "items" not in response or not response["items"]:
-            # print(f"К сожалению нет вакансий по запросу: {keyword}")
+            # Если нет вакансий по запросу, возвращаем пустой список
             return []
 
         result = []

@@ -5,6 +5,9 @@ from classes.vacancy import Vacancy
 
 
 def user_interaction():
+    """
+    Функция взаимодействия с пользователем. Получает запросы и выводит результат на экран, сохраняет в файл.
+    """
     interaction_count = 0
     while True:
         Vacancy.get_empty_list()

@@ -9,6 +9,16 @@ from classes.abstract import GetByApi
 
 class SuperJob(GetByApi):
     def get_vacancies(self, keyword, num_vacancies=25):
+        """
+        Получить список вакансий из API SuperJob на основе указанного ключевого слова.
+
+        Аргументы:
+            keyword (str): Ключевое слово для поиска вакансий.
+            num_vacancies (int, optional): Количество вакансий для получения.
+
+        Возвращает:
+            list: Список словарей, представляющих полученные вакансии.
+        """
         __api_key = os.getenv("SJ_TOKEN")
         __URL = "https://api.superjob.ru/2.0/vacancies/"
         headers = {"X-Api-App-Id": __api_key}
@@ -28,6 +38,7 @@ class SuperJob(GetByApi):
                 "date_published_from": unix_time,
             }
 
+            # Проверка соединения с API
             check = requests.get(url=__URL, headers=headers)
             if check.status_code != requests.codes.ok:
                 print(f"{check.status_code} - ошибка соединения. Программа завершается.")
@@ -36,7 +47,7 @@ class SuperJob(GetByApi):
             response = requests.get(url=__URL, headers=headers, params=params).json()
 
             if "objects" not in response or not response["objects"]:
-                # print(f"К сожалению нет вакансий по запросу: {keyword}")
+                # Если нет вакансий по запросу, выходим из цикла
                 break
 
             result = []
