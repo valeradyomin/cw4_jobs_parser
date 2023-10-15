@@ -9,7 +9,8 @@ def user_interaction():
     while True:
         Vacancy.get_empty_list()
         interaction_count += 1
-        print("\nНачальное меню:")
+        print("\nНачальное меню программы по поиску работы на платформах предоставления вакансий:")
+        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         interaction = input("Укажите действие:"
                             "\n1 - использовать HeadHunter\n2 - использовать SuperJob\n3 - Выход\n")
         if interaction == "1":
@@ -35,8 +36,9 @@ def user_interaction():
                     json_saver = JsonOut(vacancies)
 
                     print("\nМеню отображения результатов:")
+                    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
                     sub_interaction = input("Отобразить и сохранить в файл результат:\n1 - полная выборка"
-                                            "\n2 - отсортированный по убыванию зарплаты (сначала большая зарплата"
+                                            "\n2 - отсортированный по убыванию зарплаты (сначала большая зарплата)"
                                             "\n3 - с зарплатой больше указанного значения (указать минимальную)"
                                             "\n4 - ТОП-№ вакансий по зарплате (указать количество выборки)\n")
 
@@ -46,7 +48,7 @@ def user_interaction():
                         )
                         for vacancy in vacancies:
                             vacancy.get_overview()
-                        print(f"Сохранено в файл {len(vacancies)} вакансий")
+                        print(f"\n-----------> Сохранено в файл {len(vacancies)} вакансий")
                         break
 
                     elif sub_interaction == "2" and sub_interaction in ("1", "2", "3", "4"):
@@ -55,7 +57,7 @@ def user_interaction():
                         )
                         for vacancy in sorted_vacancies:
                             vacancy.get_overview()
-                        print(f"Сохранено в файл {len(sorted_vacancies)} вакансий")
+                        print(f"\n-----------> Сохранено в файл {len(sorted_vacancies)} вакансий")
                         break
 
                     elif sub_interaction == "3" and sub_interaction in ("1", "2", "3", "4"):
@@ -75,7 +77,7 @@ def user_interaction():
                                 )
                                 for vacancy in vacancies_by_average_salary:
                                     vacancy.get_overview()
-                                print(f"Сохранено в файл {len(vacancies_by_average_salary)} вакансий")
+                                print(f"\n-----------> Сохранено в файл {len(vacancies_by_average_salary)} вакансий")
                                 break
                             else:
                                 print(
@@ -92,7 +94,7 @@ def user_interaction():
                                     )
                                     for vacancy in top_n_vacancies:
                                         vacancy.get_overview()
-                                    print(f"Сохранено в файл {len(top_n_vacancies)} вакансий")
+                                    print(f"\n-----------> Сохранено в файл {len(top_n_vacancies)} вакансий")
                                     break
                                 else:
                                     print(f"Укажите значение меньше {num_vacancies} либо равно")
@@ -126,8 +128,9 @@ def user_interaction():
                     json_saver = JsonOut(vacancies)
 
                     print("\nМеню отображения результатов:")
+                    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
                     sub_interaction = input("Отобразить и сохранить в файл результат:\n1 - полная выборка"
-                                            "\n2 - отсортированный по убыванию зарплаты (сначала большая зарплата"
+                                            "\n2 - отсортированный по убыванию зарплаты (сначала большая зарплата)"
                                             "\n3 - с зарплатой больше указанного значения (указать минимальную)"
                                             "\n4 - ТОП-№ вакансий по зарплате (указать количество выборки)\n")
 
@@ -137,7 +140,7 @@ def user_interaction():
                         )
                         for vacancy in vacancies:
                             vacancy.get_overview()
-                        print(f"Сохранено в файл {len(vacancies)} вакансий")
+                        print(f"\n-----------> Сохранено в файл {len(vacancies)} вакансий")
                         break
 
                     elif sub_interaction == "2" and sub_interaction in ("1", "2", "3", "4"):
@@ -146,7 +149,7 @@ def user_interaction():
                         )
                         for vacancy in sorted_vacancies:
                             vacancy.get_overview()
-                        print(f"Сохранено в файл {len(sorted_vacancies)} вакансий")
+                        print(f"\n-----------> Сохранено в файл {len(sorted_vacancies)} вакансий")
                         break
 
                     elif sub_interaction == "3" and sub_interaction in ("1", "2", "3", "4"):
@@ -166,7 +169,7 @@ def user_interaction():
                                 )
                                 for vacancy in vacancies_by_average_salary:
                                     vacancy.get_overview()
-                                print(f"Сохранено в файл {len(vacancies_by_average_salary)} вакансий")
+                                print(f"\n-----------> Сохранено в файл {len(vacancies_by_average_salary)} вакансий")
                                 break
                             else:
                                 print(
@@ -183,7 +186,7 @@ def user_interaction():
                                     )
                                     for vacancy in top_n_vacancies:
                                         vacancy.get_overview()
-                                    print(f"Сохранено в файл {len(top_n_vacancies)} вакансий")
+                                    print(f"\n-----------> Сохранено в файл {len(top_n_vacancies)} вакансий")
                                     break
                                 else:
                                     print(f"Укажите значение меньше {num_vacancies} либо равно")
