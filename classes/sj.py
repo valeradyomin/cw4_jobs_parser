@@ -4,7 +4,11 @@ import time
 
 import requests
 
+from dotenv import load_dotenv
+
 from classes.abstract import GetByApi
+
+load_dotenv()
 
 
 class SuperJob(GetByApi):
